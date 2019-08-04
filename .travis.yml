@@ -16,7 +16,7 @@ deploy:
   file_glob: true
   api_key: ${GH_TOKEN}
   file:
-    - '*/target/*.jar'
+    - '/target/*.jar'
     - '*/*/target/*.jar'
   skip_cleanup: true
 cache:

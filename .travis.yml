@@ -1,0 +1,25 @@
+language: java
+jdk:
+  - openjdk8
+sudo: false # faster builds
+
+before_script:
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+
+script: "mvn package -Dtravis_tag=$TRAVIS_TAG"
+
+before_deploy:
+  # Set up git user name and tag this commit
+  - git tag $TRAVIS_TAG
+deploy:
+  provider: releases
+  file_glob: true
+  api_key: ${GH_TOKEN}
+  file:
+    - '*/target/*.jar'
+    - '*/*/target/*.jar'
+  skip_cleanup: true
+cache:
+  directories:
+    - .autoconf
+    - $HOME/.m2

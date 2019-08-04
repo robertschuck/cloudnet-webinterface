@@ -14,7 +14,6 @@ import de.mcruben.cloudnet.webinterface.setup.WiSetup;
 public class CommandWiSetup extends Command {
     public CommandWiSetup() {
         super("wisetup", "cloudnet.webinterface.command.setup");
-        description = "starts the setup for the web interface (by Niekold and McRupen)";
     }
 
     @Override

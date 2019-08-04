@@ -112,44 +112,11 @@ public class WebInterface extends CoreModule {
     }
 
     public boolean checkUpdates() {
-        Document document = loadWebsite("https://spigot.nevercold.eu/cloudnet/webinterface/version.json");
-
-        if (!document.contains("response")) {
-            System.out.println("[WebInterface] There was an error while parsing the version, please report this in the support");
-            return true;
-        }
-
-        Document response = new Document(document.get("response").getAsJsonObject());
-
-        String newestVersion = response.getString("version");
-        String devVersion = response.getString("devversion");
-        Collection<String> oldVersions = response.getObject("oldversion", new TypeToken<Collection<String>>() {
-        }.getType());
-        String currentVersion = getModuleConfig().getVersion();
-
-        if (newestVersion.equals(currentVersion)) {
-            System.out.println("[WebInterface] You are using the newest version of the Webinterface");
-            return true;
-        }
-
-        if (devVersion.equals(currentVersion)) {
-            System.out.println("[WebInterface] You are using the current dev version of the Webinterface");
-            return true;
-        }
-
-        if (oldVersions.contains(currentVersion)) {
-            System.out.println("[WebInterface] You are using an old version of the Webinterface, you will get NO SUPPORT, please update with \"wiupdate\"");
-            return true;
-        }
-
-        System.out.println("[WebInterface] You are using a disabled version of the Webinterface, please update with \"wiupdate\"");
-        System.out.println("[WebInterface] The Module will be disabled");
-
-        return false;
+        return true;
     }
 
     public Return<MultiValue<String, String>, Boolean> checkUpdatesSilent() {
-        Document document = loadWebsite("https://spigot.nevercold.eu/cloudnet/webinterface/version.json");
+        /*Document document = loadWebsite("https://spigot.nevercold.eu/cloudnet/webinterface/version.json");
 
         if (!document.contains("response")) {
             System.out.println("[WebInterface] There was an error while parsing the version");
@@ -175,6 +142,8 @@ public class WebInterface extends CoreModule {
         }
 
         return new Return<>(new MultiValue<>(response.getString("versiondlzip"), response.getString("versiondljar")), false);
+        */
+        return new Return<>(null, true);
     }
 
     private Document loadWebsite(String url) {
